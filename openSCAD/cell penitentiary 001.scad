@@ -1,29 +1,40 @@
 
-chip_x = 40; 
-chip_y = 20;
+// measurements of the chip
+chip_x = 80; 
+chip_y = 40;
 chip_z = 6;
 chip_r = 3;
 
+// well diameter 
 well_Do = 1.5;
 well_di = 0.3;
 well_h = well_Do*2;
 
+// multiplier 
 multp_x = 0.85;
 
+// determine the number of wells in each row and column 
 ii = floor(chip_x/well_Do/multp_x-8);
 jj = floor(chip_y/well_Do-4);
 
+// size the reservoir based on the footprint of the well
 reservoir_x = ii*well_Do*multp_x;
 reservoir_y = jj*well_Do + well_Do*1.5;
 reservoir_z = chip_z - well_h - 1;
 
 // mounting holes 
-mount_D = 2; 
+// https://armstrongmetalcrafts.com/Reference/MetricTapChart.aspx
+// tap holes 1.55-1.6 mm for 2mm bolt 
+mount_D = 1.6; 
 
-color([.1, .3, .3, .25]) build_chip();
+//build_inserts();
 
+fillet_base_x();
+
+//color([.1, .3, .3, .25]) build_chip();
+
+//fillet_base_x();
 //mounting_holes();
-
 //integrate_manifold();
 //color([.1, .3, .3, .25]) build_base();
 
@@ -33,12 +44,27 @@ color([.1, .3, .3, .25]) build_chip();
 //build_inserts();
 //}
 
+
+module fillet_base_x(){
+     
+    translate([chip_x/2 - chip_r, chip_y/2 - chip_r, chip_z/2])
+    difference(){
+    cube([chip_x, 1.1*chip_y, 1.1*chip_z], center = true);
+    
+    rotate([90, 0, 0])    
+    cylinder(h = 2*chip_y, r1 = chip_x/2, r2 = chip_x/2, center = true, $fn = 100);  
+    }
+       
+    }
+
+
 module build_chip(){
     
     difference(){
         build_base();
         integrate_manifold();
         mounting_holes();
+        fillet_base_x();
         } 
     }
 
@@ -56,7 +82,6 @@ module integrate_manifold(){
     
     color([.6, .1, .1, .5])
     union(){
-        
         
         build_inserts();
         build_reservoir();
@@ -90,7 +115,7 @@ module build_inserts(){
     translate([0, 0, well_h+reservoir_z/2])
     translate([0, i*reservoir_y/3 ,0])
     rotate([0,90,0])
-    cylinder(h = chip_x, r1 = reservoir_z/2, r2 = reservoir_z/2, center = false, $fn = 100); 
+    cylinder(h = chip_x, r1 = reservoir_z/2, r2 = mount_D/2, center = false, $fn = 100); 
  
     
     }}
