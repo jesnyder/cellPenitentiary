@@ -3,15 +3,15 @@
 
 fn_num = 10;
 
-chip_x = 60;
+chip_x = 30;
 chip_y = 30;
-chip_z = 1.75;
+chip_z = 1.85;
 
 chip_h = 1.75;
 chip_r = chip_h;
 
 well_D1 = 1.15;
-well_d0 = .2;
+well_d0 = .5;
 well_h0 = .1;
 well_H1 = 1.00;
 
@@ -50,7 +50,7 @@ module make_inlets(){
     for (i=[1:2]){
     translate([0,i/3*(chip_y-wells_y*well_D1+well_D1), well_H1 + reservoir_z/2])
     rotate([0, 100, 0])
-    cylinder(h = 1.2*(chip_x-reservoir_x), r1 = reservoir_z/2, r2 = 3.5*reservoir_z/2, center = false, $fn = fn_num);
+    cylinder(h = 1.2*(chip_x-reservoir_x), r1 = reservoir_z, r2 = 3.5*reservoir_z/2, center = false, $fn = fn_num);
     
     }}
     
@@ -127,8 +127,8 @@ module make_well(){
     rotate_extrude($fn = 100)
     polygon(aa);
     
-    //b=[[0,0], [well_D1/2, 0], [well_D1/3, 1.1*window_height], [0, window_height]];
-    //translate([0,0, reservoir_z+well_H1])
-    //rotate_extrude($fn = 100) polygon(b); 
+    b=[[0,0], [well_D1/2, 0], [well_D1/3, 1.1*window_height], [0, window_height]];
+    translate([0,0, reservoir_z+well_H1])
+    rotate_extrude($fn = 100) polygon(b); 
     
     }
