@@ -3,7 +3,7 @@
 
 fn_num = 10;
 
-chip_x = 30;
+chip_x = 75;
 chip_y = 30;
 chip_z = 1.85;
 
@@ -11,7 +11,7 @@ chip_h = 1.75;
 chip_r = chip_h;
 
 well_D1 = 1.15;
-well_d0 = .5;
+well_d0 = .75;
 well_h0 = .1;
 well_H1 = 1.00;
 
