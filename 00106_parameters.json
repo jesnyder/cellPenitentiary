@@ -1,0 +1,15 @@
+{
+    "volume unit": "mL",
+    "length unit": "mm",
+    "xx": 75,
+    "yy": 60,
+    "zz": 1.85,
+    "rr": 4,
+    "ii": 14,
+    "jj": 15,
+    "well count": 210,
+    "reservoir volume": 1.728,
+    "well volume": 0.006913952367187499,
+    "total well volume": 1.4519299971093749,
+    "total internal volume": 3.179929997109375
+}
